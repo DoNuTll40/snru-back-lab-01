@@ -8,14 +8,13 @@ const cors = require("cors");
 
 const notFound = require('./src/middlewares/notFound');
 const error = require('./src/middlewares/error');
+const authRoute = require('./src/routes/auth-route');
 
 web.use(express.json());
 web.use(cors());
 
 // services
-web.use( "/auth", (req,res,next) => {
-    res.send({ message : "in auth"})
-} );
+web.use( "/auth", authRoute);
 
 // notFound
 web.use( notFound );
@@ -24,5 +23,5 @@ web.use( notFound );
 web.use( error )
 
 web.listen(port, () => {
-    console.log("Server start port " + port)
+    console.log("\n Server start port " + port +" : "+ `http://localhost:${port} \n`)
 })
